@@ -13,5 +13,8 @@
 - After setting up all finish it
   ![image](https://github.com/arifislam007/DevOps_LAB/assets/32135229/3dfc58d3-fd74-4059-939a-48a0e7dc0c41)
 
-
+**With VMware Workstation**
+- Download VMware Workstation 17.5.2 [Download Link](https://www.techspot.com/downloads/downloadnowfile/189/?evp=967c2f6abccd29ba6f0a68640b09c139&file=241)
+- Install VMware Workstation and Open it
+- Click on Create Virtual Machine 
 
