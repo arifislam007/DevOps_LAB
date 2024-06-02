@@ -1,6 +1,7 @@
 ## Apache Web Server On Linux
 **Configure Apache Web Server on Centos-7**
-Setting up Apache Web Server on CentOS 7 involves several steps, including updating your system, installing Apache, starting the service, and ensuring it starts automatically upon system reboot. Below is a step-by-step guide tailored for beginners.
+
+- Setting up Apache Web Server on CentOS 7 involves several steps, including updating your system, installing Apache, starting the service, and ensuring it starts automatically upon system reboot. Below is a step-by-step guide tailored for beginners.
 
 ### Step 1: Update Your System
 
