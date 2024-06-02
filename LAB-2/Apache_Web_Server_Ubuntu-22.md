@@ -49,16 +49,5 @@ You should see output indicating that the service is active (running).
 
 ### Step 6: Access Apache in a Web Browser
 
-At this point, Apache is configured to serve documents from its default document root, which is `/var/www/html`. To test that everything is working, open a web browser and go to `http://localhost`. You should see the Apache Ubuntu default page, which confirms that Apache is running correctly.
+At this point, Apache is configured to serve documents from its default document root, which is `/var/www/html`. To test that everything is working, open a web browser and go to `http://Server_IP`. You should see the Apache Ubuntu default page, which confirms that Apache is running correctly.
 
-### Step 7: Explore Further
-
-- **Configure Virtual Hosts**: To host multiple websites on your server, you'll want to set up virtual hosts. This involves creating separate directories for each site and configuring Apache to serve them based on the requested hostname.
-  
-- **Secure Apache with SSL**: For a production environment, it's crucial to secure your Apache server with SSL/TLS. You can obtain a free SSL certificate from Let's Encrypt and configure Apache to use it.
-
-- **Optimize Performance**: Learn about tuning Apache for better performance, including adjusting timeout settings, enabling caching, and optimizing memory usage.
-
-This guide provides a basic introduction to getting Apache up and running on Ubuntu 22.04. As you become more familiar with Apache, you'll discover many ways to customize and optimize your web server to meet your specific needs.
-
-Citations:
