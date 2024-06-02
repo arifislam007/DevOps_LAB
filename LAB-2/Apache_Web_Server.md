@@ -37,31 +37,12 @@ sudo systemctl enable httpd
 
 ### Step 5: Verify Apache Installation
 
-To verify that Apache has been successfully installed and is running, open a web browser and navigate to `http://localhost`. You should see the default Apache test page indicating that the server is working correctly.
+To verify that Apache has been successfully installed and is running, open a web browser and navigate to `http://Server_IP`. You should see the default Apache test page indicating that the server is working correctly.
 
 ### Step 6: Secure Your Apache Installation (Optional)
 
 For production environments, it's highly recommended to secure your Apache installation. One of the first steps is to disable the default test page and change the default port if necessary.
 
-#### Disable Default Test Page
-
-Edit the Apache configuration file to disable the default test page:
-
-```bash
-sudo vi /etc/httpd/conf/httpd.conf
-```
-
-Find the line that says `Include conf.modules.d/*.conf` and add `LoadModule rewrite_module modules/mod_rewrite.so` below it if you plan to use URL rewriting.
-
-Then, find the section `<Directory "/var/www/html">` and set `Options Indexes FollowSymLinks` and `AllowOverride All`.
-
-Save and close the file.
-
-Restart Apache to apply changes:
-
-```bash
-sudo systemctl restart httpd
-```
 
 #### Change Default Port (Optional)
 
