@@ -9,3 +9,4 @@
   - Develop a code base on php
   - Configre mariaDB as application backend
   - Configure nginx as application frontend
+- For LAMP Sample php code located at php-code direcotry and sample db is located at mysql-db direcotory 
