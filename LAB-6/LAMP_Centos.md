@@ -112,7 +112,7 @@ create database demo;
 quit
 ```
 
-- improt database schama
+- Improt database schama
 ``` bash
 mysql -u root -p demo < ./mysql-db/dump.sql
 
