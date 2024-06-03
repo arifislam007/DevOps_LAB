@@ -1,4 +1,6 @@
-To set up a PHP repository on CentOS 7 and install PHP along with its dependencies, follow these steps, incorporating guidance from the provided sources:
+# LAMP on Centos -7 for a custom Application
+
+##To set up a PHP repository on CentOS 7 and install PHP along with its dependencies, follow these steps, incorporating guidance from the provided sources:
 
 ### Step 1: Install Required Packages
 
@@ -43,32 +45,121 @@ Check the installed PHP version to ensure the installation was successful:
 php -v
 ```
 
-### Optional: Install Additional PHP Modules
+---
+**Now Configure Mysql and Apache**
 
-You can search for and install additional PHP modules as needed. To search for available PHP modules, use:
+### Step 1: Update Package Repository Cache
 
-```bash
-sudo yum search php | more
-```
-
-To install a specific module, use:
+Before beginning, ensure your CentOS 7 server's package repository cache is up to date:
 
 ```bash
-sudo yum install php-module_name -y
+sudo yum update
 ```
 
-Replace `module_name` with the name of the module you wish to install.
+### Step 2: Install the Apache Web Server
 
-By following these steps, you will have successfully added a PHP repository to your CentOS 7 system and installed PHP along with its dependencies. This setup allows you to leverage newer PHP versions and extend PHP capabilities with additional modules as required.
+Apache serves as the web server component of the LAMP stack.
 
-Citations:
-[1] https://phoenixnap.com/kb/install-php-7-on-centos
-[2] https://www.cyberciti.biz/faq/how-to-install-php-7-2-on-centos-7-rhel-7/
-[3] https://linuxize.com/post/install-php-7-on-centos-7/
-[4] https://wiki.centos.org/HowTos/php7
-[5] https://blog.remirepo.net/post/2019/12/03/Install-PHP-7.4-on-CentOS-RHEL-or-Fedora
-[6] https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-centos-7
-[7] https://stackoverflow.com/questions/54612401/how-to-install-php-7-x-on-centos-7
-[8] https://medium.com/@nadjibammour80/how-to-install-php-7-4-in-centos-7-806997b74b42
-[9] https://www.linode.com/community/questions/19078/install-php-71-72-73-on-centos-7
-[10] https://docs.rackspace.com/docs/centos-7-apache-and-php-install
+1. Install Apache:
+
+```bash
+sudo yum install httpd
+```
+
+2. Start the Apache service:
+
+```bash
+sudo systemctl start httpd.service
+```
+
+3. Enable Apache to start at boot:
+
+```bash
+sudo systemctl enable httpd.service
+```
+
+### Step 3: Install MySQL (MariaDB) and Create a Database
+
+MariaDB acts as the database component, serving as a drop-in replacement for MySQL.
+
+1. Install MariaDB:
+
+```bash
+sudo yum install mariadb-server mariadb
+```
+
+2. Start the MariaDB service:
+
+```bash
+sudo systemctl start mariadb
+```
+
+### Step 4: Secure Your MySQL Installation
+
+It's crucial to secure your MariaDB installation by running the security script.
+
+```bash
+sudo mysql_secure_installation
+```
+
+Follow the prompts to set a root password, remove anonymous users, disallow root login remotely, remove the test database, and reload privilege tables.
+
+### Step 6: Import Demo Database Schema 
+- Create a database name demo
+```bash
+mysql -u root -p
+create database demo;
+quit
+```
+
+- improt database schama
+``` bash
+mysql -u root -p demo < ./mysql-db/dump.sql
+
+```
+- Restart the Apache service to enable PHP processing:
+
+```bash
+sudo systemctl restart httpd.service
+```
+
+### Step 6: Test PHP Processing
+
+To verify PHP is working correctly, create a simple PHP file.
+
+1. Install the Nano text editor if it's not already installed:
+
+```bash
+sudo yum install nano
+```
+
+2. Create a PHP info file:
+
+```bash
+sudo vi /var/www/html/info.php
+```
+
+Paste the following PHP code into the file:
+
+```php
+<?php
+phpinfo();
+?>
+```
+
+
+3. Access the file from your web browser by navigating to `http://your_server_ip/info.php`. Replace `your_server_ip` with your server's actual IP address. If PHP is configured correctly, you'll see a webpage displaying PHP information.
+
+### Step 8: Keep Code In Appache Defalut Location
+``` bash
+cp php-code /var/www/html/app
+```
+
+### Step 9: Restart Apache
+
+After installing new PHP modules or making significant changes, restart Apache to apply them:
+
+```bash
+sudo systemctl restart httpd.service
+```
+
