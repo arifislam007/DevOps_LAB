@@ -4,7 +4,7 @@
   - php and its dependency package
   - mysql db
 
-# Configure a LAMP on centos/Ubuntu
+# Configure a LAMP on Centos/Ubuntu
 - Deploy a custom php code with simple application
   - Develop a code base on php
   - Configre mariaDB as application backend
