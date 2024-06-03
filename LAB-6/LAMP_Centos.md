@@ -163,3 +163,4 @@ After installing new PHP modules or making significant changes, restart Apache t
 sudo systemctl restart httpd.service
 ```
 
+**Access the file from your web browser by navigating to `http://your_server_ip/app`**
