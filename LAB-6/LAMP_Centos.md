@@ -6,6 +6,7 @@ This is a simple LAMP Stack for understandin application
     yum install -y httpd
     systemctl start httpd
     systemctl enable httpd
+```
 
 #Install PHP:
 yum install -y php php-fpm php-cli php-curl php-mysqlnd php-mbstring php-devel
