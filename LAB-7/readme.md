@@ -1,4 +1,4 @@
-Set up Docker Spring Boot application backend and Laravel application frontend. 
+# Set up Docker Spring Boot application backend and Laravel application frontend. 
 **The main goal of this project**
 - To containerize applications and create a uniform developer environment across Linux, Windows and MacOS.
 - Your responsibilities will include creating Dockerfiles, configuring Docker Compose for local development.
