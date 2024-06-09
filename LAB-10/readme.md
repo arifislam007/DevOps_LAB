@@ -1,4 +1,4 @@
-# Microservice Deployment with Message Broker 
+# Microservice Deployment in Symfony with Message Broker 
 
 ### Create an application with 2 microservices that communicate via message bus.
 	•	Service "users" has an endpoint POST /users and on request with body {"email","firstName","lastName"}, stores the submitted data in a database or in a log file.
