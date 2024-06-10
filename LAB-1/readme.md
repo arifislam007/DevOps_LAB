@@ -18,3 +18,11 @@
 - Install VMware Workstation and Open it
 - Click on Create Virtual Machine 
 
+
+
+**Linux Learning Tips**
+- Basic Operation Command
+- IP Management (Assigment and change)
+- File and Directory Management
+- Text Editor Operation
+- Firewall Management
