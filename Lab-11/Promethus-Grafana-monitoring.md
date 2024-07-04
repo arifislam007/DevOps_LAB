@@ -69,3 +69,5 @@ kubernetes apply -f kubernetes-grafana/
 
 ```
 
+Ref link: 
+https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/
