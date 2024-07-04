@@ -24,7 +24,8 @@ This deployment use namespace as monitoring.
   ``` bash
   kubectl create namespace monitoring
   ```
-  ```bash
+  
+```bash
 git clone https://github.com/techiescamp/kubernetes-prometheus
 ```
 
