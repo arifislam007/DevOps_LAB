@@ -27,5 +27,7 @@ This deployment use namespace as monitoring.
   
   ```bash
   git clone https://github.com/techiescamp/kubernetes-prometheus
+
+  kubectl apply -f kubernetes-prometheus
   ```
 
