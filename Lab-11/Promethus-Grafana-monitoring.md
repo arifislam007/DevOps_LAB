@@ -1,7 +1,8 @@
 # This LAB is for Promethus and Graphana on kubernetes cluster to monitor Kubernetes Cluster in Different angle
 # Assume that you have a Kubernetes cluster up and running with kubectl setup
 ## This LAB has two part
-- Promethus
+- Promethus Server
+- Kube State Metrics
 - Graphana
 
 ## Promethus Part
@@ -30,4 +31,30 @@ This deployment use namespace as monitoring.
 
   kubectl apply -f kubernetes-prometheus
   ```
+
+## Kube State Metrics
+Kube State Metrics is a service that interacts with the Kubernetes API server to gather detailed information about all API objects such as deployments, pods, daemonsets, and statefulsets. It primarily produces metrics in Prometheus format, maintaining the same stability as the Kubernetes API. This service provides metrics for Kubernetes objects and resources that are not directly available from native Kubernetes monitoring components.
+
+- Node status, node capacity (CPU and memory)
+- Replica-set compliance (desired/available/unavailable/updated status of replicas per deployment)
+- Pod status (waiting, running, ready, etc)
+- Ingress metrics
+- PV, PVC metrics
+- Daemonset & Statefulset metrics.
+- esource requests and limits.
+- Job & Cronjob metrics
+  
+Step 1: Clone the Github repo
+```bash
+git clone https://github.com/devopscube/kube-state-metrics-configs.git
+kubectl apply -f kube-state-metrics-configs/
+kubectl get deployments kube-state-metrics -n kube-system
+```
+
+** Need to confirm that the  following part is in the promethus config part 
+```bash
+- job_name: 'kube-state-metrics'
+  static_configs:
+    - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
+```
 
