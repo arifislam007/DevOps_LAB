@@ -51,10 +51,21 @@ kubectl apply -f kube-state-metrics-configs/
 kubectl get deployments kube-state-metrics -n kube-system
 ```
 
-** Need to confirm that the  following part is in the promethus config part 
+**Need to confirm that the  following part is in the promethus config part** 
 ```bash
 - job_name: 'kube-state-metrics'
   static_configs:
     - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
+```
+
+# Grafana part
+Grafana is an open-source lightweight dashboard tool. It can be integrated with many data sources like Prometheus, AWS cloud watch, Stackdriver, etc. Running Grafana on Kubernetes
+
+### Clone Grafana Git repository 
+
+```bash
+git clone https://github.com/bibinwilson/kubernetes-grafana.git
+kubernetes apply -f kubernetes-grafana/
+
 ```
 
