@@ -1,4 +1,5 @@
 # This LAB is for Promethus and Graphana on kubernetes cluster to monitor Kubernetes Cluster in Different angle
+# Assume that you have a Kubernetes cluster up and running with kubectl setup
 ## This LAB has two part
 - Promethus
 - Graphana
@@ -15,4 +16,15 @@
 
 ## Prometheus Architecture
 ![image](https://github.com/arifislam007/DevOps_LAB/assets/32135229/6f7ce82f-8168-4526-959e-41760605144d)
+
+# Lets deploy Promethus on Kubernetes Cluste 
+Clone the following github repository. This repo has all necessary file that you need to deploy Promethus.
+This deployment use namespace as monitoring.
+- Create a namespace named monitoring
+  ``` bash
+  kubectl create namespace monitoring
+  ```
+  ```bash
+git clone https://github.com/techiescamp/kubernetes-prometheus
+```
 
