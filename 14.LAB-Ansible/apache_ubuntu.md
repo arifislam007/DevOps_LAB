@@ -1,3 +1,4 @@
+```bash
 ---
 - name: Install Apache
   hosts:
@@ -18,3 +19,4 @@
     src: index.html.j2
     dest: /var/www/html/index.html
     mode: '0644'
+```
