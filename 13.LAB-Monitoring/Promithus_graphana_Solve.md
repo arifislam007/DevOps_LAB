@@ -5,7 +5,7 @@
 - Kube State Metrics
 - Graphana
 
-## Promethus Part
+## Promethus
 **Prometheus is a highly scalable, open-source monitoring framework that offers built-in monitoring capabilities for the Kubernetes container orchestration platform. In the field of observability, it is becoming increasingly popular due to its effective metrics and alerting features.**
 
 ## Key Point of Promethus
@@ -58,7 +58,7 @@ kubectl get deployments kube-state-metrics -n kube-system
     - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
 ```
 
-# Grafana part
+# Grafana
 Grafana is an open-source lightweight dashboard tool. It can be integrated with many data sources like Prometheus, AWS cloud watch, Stackdriver, etc. Running Grafana on Kubernetes
 
 ### Clone Grafana Git repository 
