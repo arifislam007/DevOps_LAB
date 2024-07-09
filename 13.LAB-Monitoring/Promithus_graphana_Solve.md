@@ -1,5 +1,5 @@
 # This LAB is for Promethus and Graphana on kubernetes cluster to monitor Kubernetes Cluster in Different angle
-# Assume that you have a Kubernetes cluster up and running with kubectl setup
+## Assume that you have a Kubernetes cluster up and running with kubectl setup
 ## This LAB has two part
 - Promethus Server
 - Kube State Metrics
