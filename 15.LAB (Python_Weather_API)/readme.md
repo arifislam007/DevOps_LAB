@@ -54,5 +54,6 @@ This application retrieves current weather data for a specified city using the O
    ```
 
 ## Run the Application
-just browse to your docker host ip: **YourDockerHostIP:8080/weather?city=Dhaka
+just browse to your docker host ip: **YourDockerHostIP:8080/weather?city=Dhaka </br>
+for me its http://10.200.205.187:8080/weather?city=Dhaka
 
