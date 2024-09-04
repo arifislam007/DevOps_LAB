@@ -1,13 +1,9 @@
 # Weather App using Python for Dockerization
 
 A simple weather application built with Python, Flask, and the OpenWeather API. This app provides current weather information for a given city.
+## Create Weather API from OpenWeather site 
+Visit web: https://home.openweathermap.org/users/sign_in
 
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Docker Setup](#docker-setup)
 
 ## Project Overview
 
