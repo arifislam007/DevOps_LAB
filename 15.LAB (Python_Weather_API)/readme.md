@@ -47,8 +47,6 @@ This application retrieves current weather data for a specified city using the O
 
 ## Run Docker Container with the image and API Key
 
-   Create a `.env` file in the root directory with the following content:
-
    ```bash
    docker run -itd --name weatherAPI -e OPENWEATHER_API_KEY=YourAPIKeyPlaceHere -p 8080:5000 MyPython_app:v1
    ```
