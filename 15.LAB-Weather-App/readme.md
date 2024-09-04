@@ -3,6 +3,11 @@
 A simple weather application built with Python, Flask, and the OpenWeather API. This app provides current weather information for a given city.
 ## Create Weather API from OpenWeather site 
 Visit web: https://home.openweathermap.org/users/sign_in
+- create a account
+- Login to the site dashboard
+- you will get an api key from api tab
+- ![image](https://github.com/user-attachments/assets/2e8352ad-74e4-417e-aaae-f20420a5f911)
+
 
 
 ## Project Overview
