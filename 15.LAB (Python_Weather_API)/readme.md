@@ -39,15 +39,13 @@ This application retrieves current weather data for a specified city using the O
       requests==2.28.2
    ```
 
-## Usage
-
-### Buidl A Docker image 
+## Usage: Build a Docker image
 
    ```sh
       docker build -t MyPython_app:v1 .
    ```
 
-1. **Run Docker Container with the image and API Key**
+## Run Docker Container with the image and API Key
 
    Create a `.env` file in the root directory with the following content:
 
@@ -55,6 +53,6 @@ This application retrieves current weather data for a specified city using the O
    docker run -itd --name weatherAPI -e OPENWEATHER_API_KEY=YourAPIKeyPlaceHere -p 8080:5000 MyPython_app:v1
    ```
 
-2. **Run the Application**
+## Run the Application
 just browse to your docker host ip: **YourDockerHostIP:8080/weather?city=Dhaka
 
