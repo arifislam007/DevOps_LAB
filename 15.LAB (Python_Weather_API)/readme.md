@@ -8,8 +8,6 @@ A simple weather application built with Python, Flask, and the OpenWeather API. 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Docker Setup](#docker-setup)
-- [Environment Variables](#environment-variables)
-- [License](#license)
 
 ## Project Overview
 
@@ -26,7 +24,7 @@ This application retrieves current weather data for a specified city using the O
 
 1. **Clone the Repository**
 
-   ```sh
+   ```bash
    git clone https://github.com/arifislam007/DevOps_LAB.git
    cd weather-app/15.LAB (Python_Weather_API)
 
@@ -53,7 +51,7 @@ This application retrieves current weather data for a specified city using the O
 
    Create a `.env` file in the root directory with the following content:
 
-   ```sh
+   ```bash
    docker run -itd --name weatherAPI -e OPENWEATHER_API_KEY=YourAPIKeyPlaceHere -p 8080:5000 MyPython_app:v1
    ```
 
