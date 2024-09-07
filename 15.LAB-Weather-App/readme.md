@@ -27,7 +27,7 @@ This application retrieves current weather data for a specified city using the O
 
    ```bash
    git clone https://github.com/arifislam007/DevOps_LAB.git
-   cd weather-app/15.LAB-Weather-App
+   cd DevOps_LAB/15.LAB-Weather-App
 
    ```
 
