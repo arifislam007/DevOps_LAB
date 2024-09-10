@@ -7,3 +7,10 @@ dnf install -y rabbitmq-server
 systemctl start rabbitmq-server
 rabbitmq-plugins enable rabbitmq_management
 ```
+
+# Create and give user permission 
+```bash
+rabbitmqctl add_user test test
+rabbitmqctl set_user_tags test administrator
+rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
+```
