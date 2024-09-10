@@ -14,3 +14,9 @@ rabbitmqctl add_user test test
 rabbitmqctl set_user_tags test administrator
 rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
 ```
+# Declare Queue and topic in RabitMq
+```bash
+wget http://localhost:15672/cli/rabbitmqadmin
+chmod +x rabbitmqadmin
+./rabbitmqadmin declare queue name=test-queue
+```
