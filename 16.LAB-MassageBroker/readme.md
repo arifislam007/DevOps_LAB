@@ -29,5 +29,6 @@ sudo apt update
 sudo apt install logstash
 ```
 - Then Create a data processing configuration file on the directory /etc/logstash/conf.d/rabitmq.conf
+- Make sure that source log file has permission to read like /var/log/syslog
 
 
