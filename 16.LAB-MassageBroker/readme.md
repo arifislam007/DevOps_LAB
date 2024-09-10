@@ -20,3 +20,14 @@ wget http://localhost:15672/cli/rabbitmqadmin
 chmod +x rabbitmqadmin
 ./rabbitmqadmin declare queue name=test-queue
 ```
+
+# Install logstash on log endpoint
+```bash
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+sudo apt update
+sudo apt install logstash
+```
+- Then Create a data processing configuration file on the directory /etc/logstash/conf.d/rabitmq.conf
+
+
