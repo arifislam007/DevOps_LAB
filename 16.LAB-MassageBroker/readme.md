@@ -18,7 +18,10 @@ rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
 ```bash
 wget http://localhost:15672/cli/rabbitmqadmin
 chmod +x rabbitmqadmin
-./rabbitmqadmin declare queue name=test-queue
+./rabbitmqadmin declare exchange name=logstash_exchange type=direct
+./rabbitmqadmin declare queue name=logstash_queue durable=true
+./rabbitmqadmin declare binding source=logstash_exchange destination=logstash_queue routing_key=logstash_key
+
 ```
 
 # Install logstash on log endpoint
@@ -30,5 +33,10 @@ sudo apt install logstash
 ```
 - Then Create a data processing configuration file on the directory /etc/logstash/conf.d/rabitmq.conf
 - Make sure that source log file has permission to read like /var/log/syslog
+
+# Manually consuem logs if you have any issue with Logs consumeing
+```bash
+/rabbitmqadmin get queue=logstash_queue
+```
 
 
