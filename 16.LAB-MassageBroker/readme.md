@@ -36,7 +36,7 @@ sudo apt install logstash
 
 # Manually consuem logs if you have any issue with Logs consumeing
 ```bash
-/rabbitmqadmin get queue=logstash_queue
+./rabbitmqadmin get queue=logstash_queue
 ```
 
 
