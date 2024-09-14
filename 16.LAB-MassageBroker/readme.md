@@ -39,4 +39,9 @@ sudo apt install logstash
 ./rabbitmqadmin get queue=logstash_queue
 ```
 
+# Manually input logs into the queue
+```bash
+./rabbitmqadmin publish routing_key=test-queue payload="Test log message"
+```
+
 
