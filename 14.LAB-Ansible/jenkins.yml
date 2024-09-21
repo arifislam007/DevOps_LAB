@@ -1,4 +1,3 @@
----
 - name: Install Jenkins on Rocky Linux with Java 17
   hosts: all
   become: yes
@@ -49,3 +48,11 @@
       ansible.builtin.systemd:
         name: firewalld
         state: reloaded
+
+    - name: Get Jenkins initial admin password
+      command: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: jenkins_initial_password
+
+    - name: Display Jenkins initial admin password
+      debug:
+        msg: "Jenkins initial admin password is: {{ jenkins_initial_password.stdout }}"
