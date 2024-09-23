@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcat-users>
+    <!-- Define roles for manager and admin -->
+    <role rolename="manager-gui"/>
+    <role rolename="admin-gui"/>
+
+    <!-- Create users with these roles -->
+    <user username="admin" password="adminpassword" roles="manager-gui,admin-gui"/>
+    <user username="manager" password="managerpassword" roles="manager-gui"/>
+</tomcat-users>
