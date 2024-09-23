@@ -1,4 +1,3 @@
-
 ```markdown
 # Apache Tomcat Installation on Rocky Linux 9
 
@@ -142,4 +141,3 @@ We are using a minimal installed Rocky Linux 9 virtual machine with the followin
    ```
 
 You now have Apache Tomcat running on Rocky Linux 9 with Java 17.
-```
