@@ -68,7 +68,7 @@ We are using a minimal installed Rocky Linux 9 virtual machine with the followin
 1. Download and extract Apache Tomcat:
    ```bash
    # cd /tmp
-   # wget [https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.tar.gz](https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.30/bin/apache-tomcat-10.1.30.tar.gz)
+   # wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.30/bin/apache-tomcat-10.1.30.tar.gz
    # mkdir /opt/tomcat
    # tar xf apache-tomcat-10.0.27.tar.gz -C /opt/tomcat --strip-components=1
    ```
