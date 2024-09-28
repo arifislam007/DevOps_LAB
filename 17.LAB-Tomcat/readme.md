@@ -96,7 +96,11 @@ We are using a minimal installed Rocky Linux 9 virtual machine with the followin
    Edit the `context.xml` files in both `manager` and `host-manager` directories:
    ```bash
    # vi /opt/tomcat/webapps/manager/META-INF/context.xml
+   ![image](https://github.com/user-attachments/assets/7cafd314-0456-4c51-ba90-fcf9bbf99a7b)
+
    # vi /opt/tomcat/webapps/host-manager/META-INF/context.xml
+   ![image](https://github.com/user-attachments/assets/e7c6c344-fb2d-42f2-b2e2-975ac798a6b7)
+
    ```
    Comment out the `RemoteAddrValve` to allow access from other machines.
 
