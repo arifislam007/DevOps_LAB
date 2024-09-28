@@ -89,7 +89,8 @@ We are using a minimal installed Rocky Linux 9 virtual machine with the followin
    ```xml
    <role rolename="admin-gui"/>
    <role rolename="manager-gui"/>
-   <user username="admin" password="admin" roles="admin-gui,manager-gui"/>
+   <role rolename="manager-script"/>
+   <user username="admin" password="admin" roles="admin-gui,manager-gui,manager-script"/>
    ```
 
 2. **Allow external access**:
