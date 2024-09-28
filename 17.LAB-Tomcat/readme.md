@@ -1,4 +1,3 @@
-```markdown
 # Apache Tomcat Installation on Rocky Linux 9
 
 ## Environment Specification
