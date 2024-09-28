@@ -24,3 +24,4 @@ terraform version
 ```
 
 
+https://github.com/arifislam007/terraform_aws_vpc_ec2/blob/main/ec2_launch.tf
