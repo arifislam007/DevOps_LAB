@@ -97,12 +97,14 @@ We are using a minimal installed Rocky Linux 9 virtual machine with the followin
 
    # vi /opt/tomcat/webapps/manager/META-INF/context.xml
    **Comment out the `RemoteAddrValve` to allow access from other machines**
-   [image](https://github.com/user-attachments/assets/b6710294-7bf6-4a6f-bf4e-8c9a0c42afa9)
+   ![image](https://github.com/user-attachments/assets/b63f5546-f8d8-471a-b858-4b55a8debe1b)
+
 
 
    # vi /opt/tomcat/webapps/host-manager/META-INF/context.xml
    **Comment out the `RemoteAddrValve` to allow access from other machines**
-   [image](https://github.com/user-attachments/assets/e7c6c344-fb2d-42f2-b2e2-975ac798a6b7)
+   ![image](https://github.com/user-attachments/assets/ee80cc45-e3bd-4a82-b0df-c82b4dab6e83)
+
 
 
 
