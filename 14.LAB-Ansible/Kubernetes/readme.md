@@ -58,11 +58,6 @@
         name: containerd
         state: present
 
-    - name: Remove config.toml file
-      file:
-        path: /etc/containerd/config.toml
-        state: absent
-      
     - name: Enable and start containerd
       systemd:
         name: containerd
@@ -135,6 +130,11 @@
         group: "{{ ansible_user }}"
         mode: '0644'
       when: kubeadm_init.rc == 0
+
+    - name: Remove config.toml file
+      file:
+        path: /etc/containerd/config.toml
+        state: absent
 
     - name: Install Weave Net network plugin
       command: kubectl apply -f https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')
