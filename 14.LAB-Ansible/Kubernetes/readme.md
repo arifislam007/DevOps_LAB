@@ -1,3 +1,4 @@
+bash```
 ---
 - name: Deploy Kubernetes on Rocky Linux 9
   hosts: all
@@ -154,3 +155,5 @@
     - name: Join worker node to the cluster
       command: "{{ hostvars['master']['join_command'].stdout }}"
       ignore_errors: yes
+
+```
