@@ -1,11 +1,30 @@
-bash```
+# Deploy Kubernetes on Rocky Linux 9 using Ansible
+
+This Ansible playbook will deploy a Kubernetes cluster on Rocky Linux 9 with both master and worker nodes. It handles common system configurations, installs necessary dependencies, and initializes the cluster with a master node and one or more workers.
+
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Common Setup for Master and Worker Nodes](#common-setup-for-master-and-worker-nodes)
+- [Master Node Setup](#master-node-setup)
+- [Worker Node Setup](#worker-node-setup)
+
+## Prerequisites
+
+- Ensure that the `hosts` file is configured properly to group your nodes as `master` and `workers`.
+- Ansible must be installed on the control machine.
+- Root (sudo) access is required on all target nodes.
+
+## Common Setup for Master and Worker Nodes
+
+The following tasks are run on both master and worker nodes:
+
+```yaml
 ---
 - name: Deploy Kubernetes on Rocky Linux 9
   hosts: all
   become: yes
   tasks:
-    # COMMON TASKS FOR BOTH MASTER AND WORKERS
-
     - name: Disable SELinux temporarily
       command: setenforce 0
       when: ansible_os_family == "RedHat"
@@ -48,7 +67,6 @@ bash```
     - name: Add Docker repository
       yum_repository:
         name: docker
-        description: Docker CE Stable - $basearch
         baseurl: https://download.docker.com/linux/centos/8/$basearch/stable
         gpgcheck: yes
         gpgkey: https://download.docker.com/linux/centos/gpg
@@ -58,6 +76,11 @@ bash```
       dnf:
         name: containerd
         state: present
+
+    - name: Remove config.toml file
+      file:
+        path: /etc/containerd/config.toml
+        state: absent
 
     - name: Enable and start containerd
       systemd:
@@ -79,7 +102,6 @@ bash```
     - name: Add Kubernetes YUM repository
       yum_repository:
         name: kubernetes
-        description: Kubernetes YUM Repository
         baseurl: https://pkgs.k8s.io/core:/stable:/v1.30/rpm/
         enabled: yes
         gpgcheck: yes
@@ -110,9 +132,13 @@ bash```
         value: 1
         sysctl_set: yes
         state: present
+```
 
-# MASTER NODE TASKS
+## Master Node Setup
 
+The following tasks are specific to the master node:
+
+```yaml
 - name: Initialize Kubernetes on Master
   hosts: master
   become: yes
@@ -132,11 +158,6 @@ bash```
         mode: '0644'
       when: kubeadm_init.rc == 0
 
-    - name: Remove config.toml file
-      file:
-        path: /etc/containerd/config.toml
-        state: absent
-
     - name: Install Weave Net network plugin
       command: kubectl apply -f https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')
       when: kubeadm_init.rc == 0
@@ -145,9 +166,13 @@ bash```
       command: kubeadm token create --print-join-command
       register: join_command
       when: kubeadm_init.rc == 0
+```
 
-# WORKER NODE TASKS
+## Worker Node Setup
 
+The following tasks join worker nodes to the Kubernetes cluster:
+
+```yaml
 - name: Join Worker Nodes to the Kubernetes Cluster
   hosts: workers
   become: yes
@@ -155,5 +180,13 @@ bash```
     - name: Join worker node to the cluster
       command: "{{ hostvars['master']['join_command'].stdout }}"
       ignore_errors: yes
-
 ```
+
+## How to Use
+
+1. Clone the repository and update the `hosts` file with your inventory.
+2. Run the playbook:
+
+   ```bash
+   ansible-playbook -i hosts kubernetes-rocky.yml
+   ```
