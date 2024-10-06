@@ -1,0 +1,156 @@
+---
+- name: Deploy Kubernetes Master Node on Rocky Linux 9
+  hosts: master
+  become: yes
+  tasks:
+
+    # 1. Add Host file entry
+    - name: Add host file entry for Kubernetes Master node
+      lineinfile:
+        path: /etc/hosts
+        line: "{{ inventory_hostname }} {{ ansible_host }}"
+
+    # 2. Change Hostname
+    - name: Change hostname
+      hostname:
+        name: "k8s-master"
+
+    # 3. Disable SELinux
+    - name: Check SELinux status
+      command: getenforce
+      register: selinux_status
+
+    - name: Disable SELinux temporarily if not already disabled
+      command: setenforce 0
+      when: selinux_status.stdout != "Disabled"
+
+    - name: Ensure SELinux is disabled permanently
+      lineinfile:
+        path: /etc/sysconfig/selinux
+        regexp: '^SELINUX='
+        line: 'SELINUX=disabled'
+      when: selinux_status.stdout != "Disabled"
+
+    # 4. Disable swap
+    - name: Disable swap temporarily
+      command: swapoff -a
+
+    - name: Ensure swap is disabled permanently
+      lineinfile:
+        path: /etc/fstab
+        regexp: '^.*swap'
+        state: absent
+
+    # 5. Enable IP forwarding
+    - name: Enable IP forwarding
+      sysctl:
+        name: net.ipv4.ip_forward
+        value: 1
+        state: present
+        reload: yes
+
+    # 6. Load required kernel modules
+    - name: Load br_netfilter module
+      modprobe:
+        name: br_netfilter
+
+    - name: Ensure sysctl parameters for Kubernetes networking
+      sysctl:
+        name: net.bridge.bridge-nf-call-iptables
+        value: 1
+        state: present
+
+    # 7. Docker and Kubernetes Repository Configuration
+    - name: Install required dependencies for Docker repository
+      dnf:
+        name:
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+        state: present
+
+    - name: Add Docker repository
+      yum_repository:
+        name: docker
+        description: Docker CE Stable - $basearch
+        baseurl: https://download.docker.com/linux/centos/8/$basearch/stable
+        gpgcheck: yes
+        gpgkey: https://download.docker.com/linux/centos/gpg
+        enabled: yes
+
+    - name: Add Kubernetes repository
+      yum_repository:
+        name: kubernetes
+        description: Kubernetes YUM Repository
+        baseurl: https://pkgs.k8s.io/core:/stable:/v1.30/rpm/
+        gpgcheck: yes
+        gpgkey: https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
+        repo_gpgcheck: yes
+
+    # 8. Install Containerd package
+    - name: Install containerd package
+      dnf:
+        name: containerd
+        state: present
+
+    # 9. Remove /etc/containerd/config.toml
+    - name: Remove config.toml
+      file:
+        path: /etc/containerd/config.toml
+        state: absent
+
+    # New task: Configure containerd default settings
+    - name: Restore containerd default config and enable SystemdCgroup
+      shell: |
+        containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+        sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+
+    # 10. Start and enable containerd service
+    - name: Enable and start containerd service
+      systemd:
+        name: containerd
+        enabled: yes
+        state: started
+
+    # 11. Install Kubernetes packages
+    - name: Install kubeadm, kubelet, kubectl
+      dnf:
+        name:
+          - kubelet
+          - kubeadm
+          - kubectl
+        state: present
+
+    - name: Enable kubelet service
+      systemd:
+        name: kubelet
+        enabled: yes
+        state: started
+
+    # 12. Initialize Kubernetes master
+    - name: Initialize Kubernetes master node
+      command: kubeadm init
+      register: kubeadm_init
+      ignore_errors: yes
+
+    # Configure kubectl for the default user
+    - name: Create .kube directory for the user
+      file:
+        path: /{{ ansible_user }}/.kube
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0755'
+
+    - name: Copy Kubeconfig to the default user
+      copy:
+        src: /etc/kubernetes/admin.conf
+        dest: /{{ ansible_user }}/.kube/config
+        remote_src: yes
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0644'
+
+    # 13. Install Calico network plugin
+    - name: Install Calico network plugin
+      command: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
