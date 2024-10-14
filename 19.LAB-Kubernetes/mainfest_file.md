@@ -1,6 +1,6 @@
 # Kubernetes Manifest File
 
-This repository contains example Kubernetes manifest files that define the configuration for various Kubernetes resources such as Pods, Deployments, and Services. A **manifest file** in Kubernetes is a YAML or JSON file that describes the desired state of resources in the cluster.
+A **manifest file** in Kubernetes is a YAML or JSON file that describes the desired state of resources in the cluster.
 
 ## What is a Manifest File?
 
