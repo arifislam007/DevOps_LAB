@@ -60,7 +60,7 @@ kubectl get deployments kube-state-metrics -n kube-system
 
 # Grafana
 Grafana is an open-source lightweight dashboard tool. It can be integrated with many data sources like Prometheus, AWS cloud watch, Stackdriver, etc. Running Grafana on Kubernetes
-
+- default grafana access is both user and password : **admin**
 ### Clone Grafana Git repository 
 
 ```bash
