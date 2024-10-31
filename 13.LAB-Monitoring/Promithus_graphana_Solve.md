@@ -65,7 +65,7 @@ Grafana is an open-source lightweight dashboard tool. It can be integrated with 
 
 ```bash
 git clone https://github.com/bibinwilson/kubernetes-grafana.git
-kubernetes apply -f kubernetes-grafana/
+kubectl apply -f kubernetes-grafana/
 
 ```
 
