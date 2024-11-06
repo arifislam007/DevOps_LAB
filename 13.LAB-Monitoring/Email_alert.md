@@ -79,4 +79,32 @@ spec:
             name: grafana-smtp-config
 ```
 
-- set your mail from address here
+- set your mail from the address here
+
+### Now deploy grafana mainfest with all other relevant file like: deployment.yaml, config-map.yaml, datastore.yaml, service.yaml 
+Write the following file here:
+- grafana-datasource-config.yaml
+  ```yaml
+  apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: monitoring
+data:
+  prometheus.yaml: |-
+    {
+        "apiVersion": 1,
+        "datasources": [
+            {
+               "access":"proxy",
+                "editable": true,
+                "name": "prometheus",
+                "orgId": 1,
+                "type": "prometheus",
+                "url": "http://prometheus-service.monitoring.svc:8080",
+                "version": 1
+            }
+        ]
+    }
+  
+
