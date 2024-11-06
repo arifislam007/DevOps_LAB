@@ -84,6 +84,7 @@ spec:
 ### Now deploy grafana mainfest with all other relevant file like: deployment.yaml, config-map.yaml, datastore.yaml, service.yaml 
 Write the following file here:
 - grafana-datasource-config.yaml
+  
   ```yaml
   apiVersion: v1
 kind: ConfigMap
