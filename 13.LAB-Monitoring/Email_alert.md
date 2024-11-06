@@ -129,3 +129,10 @@ spec:
       targetPort: 3000
       nodePort: 32000
 ```
+
+
+OR you can clone the git repo and update deployment file and create a secret 
+github link:
+```bash
+git clone https://github.com/bibinwilson/kubernetes-grafana.git
+```
