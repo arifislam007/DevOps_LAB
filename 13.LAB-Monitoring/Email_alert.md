@@ -86,7 +86,7 @@ Write the following file here:
 - grafana-datasource-config.yaml
   
 ```yaml
-  apiVersion: v1
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-datasources
