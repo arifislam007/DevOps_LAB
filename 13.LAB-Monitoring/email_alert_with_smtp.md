@@ -173,22 +173,3 @@ http://<node-ip>:32000
 
 Log in with the default credentials (username: `admin`, password: `admin`).
 
-## Optional: Clone the Repository
-
-You can also clone this GitHub repository and update the deployment file with your specific details:
-
-```bash
-git clone https://github.com/bibinwilson/kubernetes-grafana.git
-```
-
-Make the necessary changes and follow the steps to deploy.
-
-## Conclusion
-
-This setup configures Grafana with SMTP for alerting, using Kubernetes secrets to manage sensitive credentials securely. You can now monitor your systems and receive email alerts for various thresholds and conditions.
-
-For further customization or issues, feel free to modify the files or raise an issue on GitHub.
-
-```
-
-This `README.md` file guides users through setting up Grafana with SMTP email alerting in a Kubernetes environment, including steps for creating secrets, configuring Grafana, and deploying everything into the cluster.
