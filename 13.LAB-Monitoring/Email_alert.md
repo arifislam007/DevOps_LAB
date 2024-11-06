@@ -8,7 +8,7 @@ kubectl create secret -n monitoring generic notifications-smtp --from-literal=us
 
 
 ### Now Wirte the deployment file for grafana 
-```bash
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -85,7 +85,7 @@ spec:
 Write the following file here:
 - grafana-datasource-config.yaml
   
-  ```yaml
+```yaml
   apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -107,5 +107,5 @@ data:
             }
         ]
     }
-  ```
+```
 
