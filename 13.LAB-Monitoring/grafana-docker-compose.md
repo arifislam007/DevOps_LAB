@@ -1,5 +1,4 @@
-version: '3'
-
+```yaml
 services:
   grafana:
     image: grafana/grafana:latest
@@ -19,3 +18,4 @@ services:
 
 volumes:
   grafana-storage:
+```
