@@ -87,5 +87,5 @@ sudo dnf install nginx -y
    sudo systemctl restart nginx
    ```
 
-### Step 4: Test Your Setup
+### Step 3: Test Your Setup
 After DNS propagation, you should be able to visit `http://ServerIP:8081` and `http://ServerIP:8081` and see the respective content.
