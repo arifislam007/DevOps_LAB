@@ -1,4 +1,4 @@
-**HAProxy: A Comprehensive Guide to Load Balancing and Proxying on Rocky Linux**
+**HAProxy: A Comprehensive Guide to Load Balancing and Proxying on Linux**
 
 ### What is a Proxy?
 
