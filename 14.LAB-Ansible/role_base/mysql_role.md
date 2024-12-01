@@ -23,6 +23,10 @@ ansible-galaxy init apache
     src: vhost.conf.j2
     dest: /etc/httpd/conf.d/mywebsite.conf
   notify: Restart Apache
+- name: Copy index file to root directory
+  copy:
+    src: index.html
+    dest: /var/www/html
 
 - name: Ensure Apache service is enabled and started
   service:
