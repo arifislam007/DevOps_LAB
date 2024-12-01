@@ -1,217 +1,122 @@
-# Ansible Role: MySQL Database
+### **Step 1: Role Directory Structure**
 
-## Description
-
-A specialized Ansible role for installing and configuring MySQL on Rocky Linux (RHEL 8/9 compatible). This role provides a comprehensive solution for MySQL database management, optimized for Rocky Linux system architecture and security model.
-
-## Key Features
-
-- MySQL 8.0+ installation
-- Rocky Linux 8 and 9 compatibility
-- DNF package management
-- SELinux integration
-- Firewalld configuration
-- System performance optimization
-- Secure database configuration
-
-## System Requirements
-
-### Rocky Linux Versions
-- Rocky Linux 8.x
-- Rocky Linux 9.x
-
-### Minimum System Specifications
-- CPU: 2 cores
-- RAM: 2 GB
-- Disk: 20 GB free space
-- Network: Internet connection for package installation
-
-## Prerequisites
-
-### Control Node
-- Ansible 2.14+
-- Python 3.8+
-- `ansible-collection-community-mysql`
-
-### Managed Nodes
-- Rocky Linux 8 or 9
-- Root or sudo access
-- SELinux enabled
-- Firewalld active
-
-## Role Variables
-
-### MySQL Installation Parameters
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `mysql_version` | `8.0` | MySQL version |
-| `mysql_datadir` | `/var/lib/mysql` | MySQL data directory |
-| `mysql_port` | `3306` | MySQL server port |
-| `mysql_bind_address` | `0.0.0.0` | Binding IP address |
-| `mysql_root_password` | `null` | MySQL root password |
-
-### Rocky Linux Specific Configuration
-
-```yaml
-# Rocky Linux MySQL configuration
-mysql_rocky_specific:
-  use_appstream: true
-  selinux_mode: enforcing
-  firewalld_zone: public
-```
-
-### Database Creation Example
-
-```yaml
-mysql_databases:
-  - name: myapp_database
-    encoding: utf8mb4
-    collation: utf8mb4_unicode_ci
-
-mysql_users:
-  - name: myapp_user
-    host: "%"
-    password: "SecurePassword123!"
-    priv: "myapp_database.*:ALL"
-```
-
-## Installation Dependencies
-
+Create the `apache` role using `ansible-galaxy`:
 ```bash
-# Install required collections
-ansible-galaxy collection install \
-  community.mysql \
-  ansible.posix \
-  community.general
+ansible-galaxy init apache
 ```
 
-## Example Playbook
+---
 
+### **Step 2: Define the Role Content**
+
+#### **1. `tasks/main.yml`** (Tasks to install and configure Apache)
 ```yaml
-- hosts: rocky_mysql_servers
+---
+- name: Install Apache HTTP server
+  yum:
+    name: httpd
+    state: present
+
+- name: Copy custom virtual host configuration
+  template:
+    src: vhost.conf.j2
+    dest: /etc/httpd/conf.d/mywebsite.conf
+  notify: Restart Apache
+
+- name: Ensure Apache service is enabled and started
+  service:
+    name: httpd
+    state: started
+    enabled: true
+```
+
+---
+
+#### **2. `handlers/main.yml`** (Restart Apache service when configuration changes)
+```yaml
+---
+- name: Restart Apache
+  service:
+    name: httpd
+    state: restarted
+```
+
+---
+
+#### **3. `templates/vhost.conf.j2`** (Custom Virtual Host Configuration)
+```jinja
+<VirtualHost *:80>
+    ServerAdmin webmaster@{{ apache_server_name }}
+    DocumentRoot {{ apache_document_root }}
+    ServerName {{ apache_server_name }}
+    ErrorLog /var/log/httpd/{{ apache_server_name }}-error.log
+    CustomLog /var/log/httpd/{{ apache_server_name }}-access.log combined
+</VirtualHost>
+```
+
+---
+
+#### **4. `defaults/main.yml`** (Default Variables for Customization)
+```yaml
+---
+apache_server_name: localhost
+apache_document_root: /var/www/html
+```
+
+---
+
+#### **5. `files/index.html`** (Static HTML File for Testing)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to {{ apache_server_name }}</title>
+</head>
+<body>
+    <h1>It works!</h1>
+</body>
+</html>
+```
+
+---
+
+### **Step 3: Use the Role in a Playbook**
+
+Create a playbook `site.yml` to apply this role.
+
+#### **`site.yml`**
+```yaml
+---
+- name: Configure Apache Web Server
+  hosts: web_servers
   become: true
-  vars:
-    mysql_root_password: "ComplexRootPassword!"
-    mysql_databases:
-      - name: rockycms
-    mysql_users:
-      - name: rockyadmin
-        password: "AdminUserPassword"
-        priv: "rockycms.*:ALL"
   roles:
-    - rocky_mysql_role
+    - apache
 ```
 
-## Security Configurations
+---
 
-### Rocky Linux Security Features
-- SELinux policy management
-- Firewalld port configuration
-- System-wide crypto policy compliance
-- Package signature verification
+### **Step 4: Inventory File**
 
-### Recommended Security Settings
+Create an inventory file `inventory` with your server details.
 
-```yaml
-mysql_security_settings:
-  remove_anonymous_users: true
-  disallow_root_login_remotely: true
-  remove_test_database: true
+#### **`inventory`**
+```ini
+[web_servers]
+web1.example.com
 ```
 
-## Performance Optimization
+---
 
-### Rocky Linux Tuned Profiles
-- Automatically selects appropriate system tuning profile
-- Configures MySQL for optimal performance
-- Adjusts kernel parameters
+### **Step 5: Run the Playbook**
 
-## Firewall Configuration
-
-Automatically configures firewalld:
-- Opens MySQL port
-- Configures service rules
-- Supports custom zone configurations
-
-## Backup Strategy
-
-### Integrated Backup Options
-- Mysqldump
-- Percona XtraBackup support
-- Automated backup scheduling
-
-```yaml
-mysql_backup:
-  enabled: true
-  directory: "/backup/mysql"
-  retention_days: 7
-```
-
-## Troubleshooting
-
-### Common Diagnostic Commands
+Run the playbook to configure Apache:
 ```bash
-# Check MySQL service status
-sudo systemctl status mysqld
-
-# Verify SELinux context
-sudo sestatus
-
-# Check firewall rules
-sudo firewall-cmd --list-all
+ansible-playbook -i inventory site.yml
 ```
 
-## Molecule Testing
+---
 
-```bash
-# Prepare test environment
-pip install molecule[docker] ansible
-molecule test --scenario-name rocky
-```
-
-## Compatibility Matrix
-
-| MySQL Version | Rocky Linux 8 | Rocky Linux 9 |
-|--------------|--------------|--------------|
-| 8.0          | ✓            | ✓            |
-| 8.1          | ✓            | ✓            |
-| 8.2          | ✓            | ✓            |
-
-## Contributing
-
-1. Fork Repository
-2. Create Feature Branch
-3. Write Molecule Tests
-4. Implement Changes
-5. Run Comprehensive Tests
-6. Submit Pull Request
-
-## License
-
-Apache License 2.0
-
-## Author
-
-Rocky MySQL Role Maintainer
-- Email: maintainer@example.com
-- GitHub: @rockylinux_ansible_maintainer
-
-## Changelog
-
-### v1.1.0
-- Added Rocky Linux 9 support
-- Improved SELinux integration
-- Enhanced firewalld configuration
-```
-
-This README provides a comprehensive guide for an Ansible MySQL role specifically designed for Rocky Linux. It covers installation, configuration, security, and performance optimization tailored to Rocky Linux's ecosystem.
-
-Key highlights:
-- Specific Rocky Linux considerations
-- Comprehensive security configuration
-- Firewalld and SELinux integration
-- Performance optimization
-- Detailed troubleshooting guide
-
-Would you like me to elaborate on any specific aspect of MySQL configuration for Rocky Linux?
+### **Customization**
+- Update the `defaults/main.yml` variables to match your server's configuration.
+- Replace `web1.example.com` in the inventory with your server's IP or hostname.
