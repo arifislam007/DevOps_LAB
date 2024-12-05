@@ -54,6 +54,8 @@ Several types of proxy services serve different purposes, including:
 ![proxy-feature](https://github.com/user-attachments/assets/aa886397-97c4-4884-863c-87820eec6009)
 
 #### How HAProxy Works
+![HAProxyWorks](https://github.com/user-attachments/assets/291f35c1-d6fc-4e6f-b4dd-640959114090)
+
 
 HAProxy operates as both a reverse proxy and a load balancer. It receives incoming requests, analyzes them, and then forwards each request to an appropriate backend server based on pre-configured algorithms (e.g., round-robin, least connections). HAProxy actively monitors backend server health to ensure traffic is only routed to servers capable of handling requests.
 
