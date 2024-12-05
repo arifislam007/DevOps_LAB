@@ -66,6 +66,10 @@ Load balancing algorithms are crucial in determining how traffic is distributed 
 3. **Source IP Hashing**: Routes requests based on the client’s IP address, ensuring that requests from the same IP consistently go to the same server (useful for session stickiness).
 4. **URI Hashing**: Distributes requests based on the hash of the requested URI, providing a consistent experience for cached content.
 
+
+Consistent Routing![image](https://github.com/user-attachments/assets/5c37cd95-3752-4de2-a755-c5bc8f78e13a)
+
+
 Each algorithm is suitable for different scenarios, and HAProxy allows users to select the best one for their environment.
 
 
