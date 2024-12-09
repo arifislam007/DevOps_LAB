@@ -1,0 +1,11 @@
+[kubernetes_master]
+kube-master ansible_host=192.168.207.30 ansible_user=sadmin ansible_become_pass=your_password
+
+[kubernetes_workers]
+worker-1 ansible_host=192.168.207.31 ansible_user=admin ansible_become_pass=your_password
+worker-2 ansible_host=192.168.207.32 ansible_user=sadmin ansible_become_pass=your_password
+
+[all:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+ansible_become=yes
+ansible_become_method=sudo
